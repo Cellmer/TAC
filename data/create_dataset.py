@@ -4,11 +4,12 @@ import os
 import soundfile as sf
 import pickle
 import argparse
+import torch
 import gpuRIR
 
 # generate audio files
-def generate_data(output_path='', avoid_clipping=0, dataset='adhoc', libri_path='/home/yi/data/Librispeech', noise_path='/home/yi/data/Nonspeech'):
-    assert dataset in ['adhoc', 'fixed'], "dataset can only be adhoc or fixed."
+def generate_data(output_path='', avoid_clipping=0, dataset='adhoc', libri_path='C:\\Dev\\Studies\\ProjektMagisterski\\TAC\\data\\libri', noise_path='C:\\Dev\\Studies\\ProjektMagisterski\\TAC\\data\\Nonspeech'):
+    assert dataset in ['adhoc', 'fixed', 'fixed_cube', 'fixed_cube_stratified', 'fixed_circle20cm'], "dataset can only be adhoc, fixed or fixed_cube."
     
     if output_path == '':
         output_path = os.getcwd()
@@ -138,7 +139,7 @@ if __name__ == "__main__":
     parser.add_argument('--avoid-clipping', metavar='avoid clipping', required=False, default=0,
                         help="Whether to avoid clipping when saving the waveforms. 0: no clipping. 1: clipping.")
     parser.add_argument('--dataset', metavar='dataset type', required=True,
-                        help="The type of dataset to generate. Can only be 'adhoc' or 'fixed'.")
+                        help="The type of dataset to generate. Can only be 'adhoc', 'fixed', 'fixed_cube', 'fixed_cube_stratified' or 'fixed_circle20cm'.")
     parser.add_argument('--libri-path', metavar='absolute path', required=True,
                         help="Absolute path for Librispeech folder containing train-clean-100, dev-clean and test-clean folders.")
     parser.add_argument('--noise-path', metavar='absolute path', required=True,
